@@ -1,5 +1,5 @@
-#!/bin/sh
+#!/usr/bin/env fish
 
 . ../../nvm.sh
 nvm alias test v0.1.2
-[ $(cat ../../alias/test) = 'v0.1.2' ]
+[ (cat ../../alias/test) = 'v0.1.2' ]

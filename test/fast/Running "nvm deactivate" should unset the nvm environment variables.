@@ -1,6 +1,6 @@
-#!/bin/sh
+#!/usr/bin/env fish
 
 . ../../nvm.sh
-nvm &&
-nvm deactivate &&
-! nvm
+nvm
+and nvm deactivate
+and not contains nvm (functions)

@@ -1,14 +1,14 @@
-#!/bin/sh
+#!/usr/bin/env fish
 
 set -e
 . ../../nvm.sh
 
 # Remove the stuff we're clobbering.
-[ -e ../../v0.6.14 ] && rm -R ../../v0.6.14
+test -e ../../v0.6.14; and rm -R ../../v0.6.14
 
 # Install
 nvm install 0.6.14
 
 # Check
-[ -d ../../v0.6.14 ]
+test -d ../../v0.6.14
 nvm run v0.6.14 --version | grep v0.6.14

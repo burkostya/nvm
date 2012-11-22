@@ -1,13 +1,10 @@
-#!/bin/sh
+#!/usr/bin/env fish
 
-(
-  cd ../..
+cd ../../
 
-  # Restore
-  if [ -d bak ]
-    then
-    mv bak/* . || sleep 0s
-    rmdir bak
-  fi
-  mkdir -p src alias
-)
+# Restore
+if test -d bak
+  mv bak/* .; or sleep 0s
+  rmdir bak
+end
+mkdir -p src alias
