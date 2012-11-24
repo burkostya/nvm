@@ -1,8 +1,9 @@
-#!/usr/bin/env fish
+#!/bin/sh
 
-cd ../../
+(
+  cd ../..
 
-# Back up
-rm -Rf v* src alias
-mkdir src alias
-
+  # Back up
+  rm -Rf v* src alias
+  mkdir src alias
+)

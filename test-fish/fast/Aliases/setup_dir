@@ -1,0 +1,5 @@
+#!/usr/bin/env fish
+
+for i in (seq 1 10)
+  echo v0.0.$i > ../../../alias/test$i
+end

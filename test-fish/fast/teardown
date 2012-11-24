@@ -1,0 +1,5 @@
+#!/usr/bin/env fish
+
+# Remove temporary files
+cd ../../
+rm -fR v* src alias

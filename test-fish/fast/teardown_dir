@@ -1,0 +1,10 @@
+#!/usr/bin/env fish
+
+cd ../../
+
+# Restore
+if test -d bak
+  mv bak/* .; or sleep 0s
+  rmdir bak
+end
+mkdir -p src alias

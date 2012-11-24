@@ -1,4 +1,4 @@
-#!/usr/bin/env fish
+#!/bin/sh
 
 . ../../../nvm.sh
-[ (nvm alias | wc -l) = '10' ]
+[ $(nvm alias | wc -l) = '10' ]

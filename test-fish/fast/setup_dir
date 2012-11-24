@@ -1,0 +1,7 @@
+#!/usr/bin/env fish
+
+cd ../../
+
+# Back up
+mkdir -p bak
+mv v* src alias bak; or sleep 0s

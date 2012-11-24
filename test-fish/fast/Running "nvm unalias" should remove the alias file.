@@ -1,6 +1,6 @@
-#!/bin/sh
+#!/usr/bin/env fish
 
 echo v0.1.2 > ../../alias/test
 . ../../nvm.sh
 nvm unalias test
-! [ -e ../../alias/test ]
+not test -e ../../alias/test

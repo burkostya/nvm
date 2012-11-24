@@ -1,0 +1,4 @@
+#!/usr/bin/env fish
+
+. ../../../nvm.sh
+[ (nvm alias test1 | wc -l) = '2' ]

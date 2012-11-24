@@ -1,0 +1,8 @@
+#!/usr/bin/env fish
+
+cd ../../
+
+# Back up
+rm -Rf v* src alias
+mkdir src alias
+
