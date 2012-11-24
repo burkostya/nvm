@@ -438,6 +438,6 @@ function nvm
   end
 end
 
-nvm ls default 2>/dev/null
+nvm ls default >/dev/null ^&1
 and nvm use default >/dev/null
 or true
