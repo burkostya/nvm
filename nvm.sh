@@ -6,6 +6,16 @@
 # with much bash help from Matthew Ranney
 
 # Auto detect the NVM_DIR
+
+function command_exists
+  if [ (count $argv) -eq 1 ]
+    if which $argv[1] >/dev/null ^&1
+      return 0
+    end
+  end
+  return 1
+end
+
 if not test -d "$NVM_DIR"
   set NVM_DIR (dirs | sed -r 's/ //g')
 end
