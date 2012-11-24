@@ -16,6 +16,10 @@ function command_exists
   return 1
 end
 
+function true
+  return 0
+end
+
 if not test -d "$NVM_DIR"
   set NVM_DIR (dirs | sed -r 's/ //g')
 end
