@@ -381,6 +381,7 @@ function nvm
     case "alias"
       mkdir -p $NVM_DIR/alias
       if [ (count $argv) -le 2 ]
+        set current_dir (pwd)
         cd $NVM_DIR/alias
         and if [ (count $argv) -ne 2 ]
           set argv[2] ""
@@ -395,6 +396,7 @@ function nvm
           end
           set -e argv[2]
         end
+        cd $current_dir
         return
       end
       if test -z "$argv[3]"
