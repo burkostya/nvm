@@ -404,7 +404,7 @@ function nvm
         echo "! WARNING: Version '$argv[3]' does not exist." >&2
       end
       echo $argv[3] > "$NVM_DIR/alias/$2"
-      if [ "$argv[3]" -ne "$VERSION"
+      if [ "$argv[3]" -ne "$VERSION" ]
         echo "$argv[2] -> $argv[3] \(-> $VERSION\)"
       else
         echo "$argv[2] -> $argv[3]"
