@@ -2,9 +2,11 @@
 
 ## Installation
 
+**Fish version is broken for now**
+
 First you'll need to make sure your system has a c++ compiler.  For OSX, XCode will work, for Ubuntu, the build-essential and libssl-dev packages work.
 
-To install create a folder somewhere in your filesystem with the "`nvm.sh`" file inside it.  I put mine in a folder called "`nvm`".
+To install create a folder somewhere in your filesystem with the "`nvm.sh`"("`nvm.fish`") file inside it.  I put mine in a folder called "`nvm`".
 
 Or if you have `git` installed, then just clone it:
 
@@ -13,8 +15,12 @@ Or if you have `git` installed, then just clone it:
 To activate nvm, you need to source it from your bash shell
 
     . ~/nvm/nvm.sh
+    
+Or for fish shell
+    
+    test -s ~/.nvm/nvm.fish; and . ~/.nvm/nvm.fish
 
-I always add this line to my ~/.bashrc or ~/.profile file to have it automatically sources upon login.   
+I always add this line to my ~/.bashrc or ~/.profile (~/.config/fish/config.fish for fish) file to have it automatically sources upon login.   
 Often I also put in a line to use a specific version of node.
     
 ## Usage
@@ -22,27 +28,38 @@ Often I also put in a line to use a specific version of node.
 To download, compile, and install the v0.6.14 release of node, do this:
 
     nvm install 0.6.14
-
+    
+Fish: **partially broken**. Binary installations works only ( node versions > v0.8.5).
 
 And then in any new shell just use the installed version:
 
     nvm use 0.6.14
+    
+Fish: *seems to work*
 
 Or you can just run it:
 
     nvm run 0.6.14
+    
+Fish: **broken**
 
 If you want to see what versions are available:
 
     nvm ls
+    
+Fish: *seems to work*
 
 To restore your PATH, you can deactivate it.
 
     nvm deactivate
+    
+Fish: **broken**
 
 To set a default Node version to be used in any new shell, use the alias 'default':
 
     nvm alias default 0.6
+    
+Fish: **broken**
 
 ## License
 
