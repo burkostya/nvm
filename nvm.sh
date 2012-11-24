@@ -359,9 +359,12 @@ function nvm
       echo "Running node $VERSION"
       $NVM_DIR/$VERSION/bin/node "$argv[1 2 3]"
     case "ls"
-      if [ (count $argv) -ge 2 ]
-        set xz (nvm_ls $argv[2])
-        print_versions $xz
+      if [ (count $argv) -eq 1 ]
+        set argv[2] ""
+        print_versions (nvm_ls $argv[2])
+        set -e argv[2]
+      else
+        print_versions (nvm_ls $argv[2])
       end
       if [ (count $argv) -eq 1 ]
         echo -n "current: "\t; and nvm_version current
@@ -375,14 +378,18 @@ function nvm
       mkdir -p $NVM_DIR/alias
       if [ (count $argv) -le 2 ]
         cd $NVM_DIR/alias
-        and for ALIAS in (\ls $argv[2]* 2>/dev/null)
-          set DEST (cat $ALIAS)
-          set VERSION (nvm_version $DEST)
-          if [ "$DEST" = "$VERSION" ]
-            echo "$ALIAS -> $DEST"
-          else
-            echo "$ALIAS -> $DEST \(-> $VERSION\)"
+        and if [ (count $argv) -ne 2 ]
+          set argv[2] ""
+          for ALIAS in (\ls $argv[2]* 2>/dev/null)
+            set DEST (cat $ALIAS)
+            set VERSION (nvm_version $DEST)
+            if [ "$DEST" = "$VERSION" ]
+              echo "$ALIAS -> $DEST"
+            else
+              echo "$ALIAS -> $DEST \(-> $VERSION\)"
+            end
           end
+          set -e argv[2]
         end
         return
       end
