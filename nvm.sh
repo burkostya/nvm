@@ -46,11 +46,15 @@ function nvm_remote_version
   end
 end
 
+
+
 function nvm_ls
   set -l PATTERN $argv[1]
   set -l VERSIONS ''
   if [ "$PATTERN" = 'current' ]
-    echo (node -v 2>/dev/null)
+    if command_exists node
+      echo (node -v 2>/dev/null)
+    end
     return
   end
   if test -f "$NVM_DIR/alias/$PATTERN"
