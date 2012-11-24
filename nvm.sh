@@ -342,10 +342,6 @@ function nvm
         case '*'
           set -x MANPATH $NVM_DIR/$VERSION/share/man $MANPATH
       end
-      # export PATH
-      functions -e nvm_version nvm_remote_version nvm_ls \
-                   nvm_ls_remote nvm_checksum print_versions nvm
-      # export MANPATH
       set -x NVM_PATH "$NVM_DIR/$VERSION/lib/node"
       set -x NVM_BIN "$NVM_DIR/$VERSION/bin"
       echo "Now using node $VERSION"
