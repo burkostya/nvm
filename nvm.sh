@@ -104,16 +104,15 @@ function nvm_checksum
   end
 end
 
-
 function print_versions
   set -l OUTPUT ''
   set -l PADDED_VERSION ''
   for VERSION in $argv[1]
     set PADDED_VERSION (printf '%10s' $VERSION)
     if test -d "$NVM_DIR/$VERSION"
-      set PADDED_VERSION "\033[0;34m$PADDED_VERSION\033[0m"
+      set PADDED_VERSION "$PADDED_VERSION"
     end
-    set OUTPUT "$OUTPUT\n$PADDED_VERSION"
+    set OUTPUT "$OUTPUT"\n"$PADDED_VERSION"
   end
   echo -e "$OUTPUT" | column
 end
