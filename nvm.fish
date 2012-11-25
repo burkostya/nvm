@@ -21,7 +21,7 @@ function true
 end
 
 if not test -d "$NVM_DIR"
-  set NVM_DIR (dirs | sed -r 's/ //g')
+  set NVM_DIR (dirname $argv[1])
 end
 
 # Expand a version using the version cache
