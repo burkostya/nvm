@@ -70,7 +70,10 @@ function nvm_ls
     case 'v?*.?*.?*'
       set VERSIONS $PATTERN
     case '*'
-      set VERSIONS ( cd $NVM_DIR; and \ls -d v$PATTERN* 2>/dev/null | sort -t. -k 1.2,1n -k 2,2n -k 3,3n )
+      set -l current_dir (pwd)
+      set VERSIONS (cd $NVM_DIR; 
+        and \ls -d v$PATTERN* 2>/dev/null | sort -t. -k 1.2,1n -k 2,2n -k 3,3n )
+      cd $current_dir
   end
   if test -z "$VERSIONS"
     echo "N/A"
@@ -219,6 +222,7 @@ function nvm
           
           set url "http://nodejs.org/dist/$VERSION/node-$t.tar.gz"
           set sum (curl -s http://nodejs.org/dist/$VERSION/SHASUMS.txt.asc | grep node-$t.tar.gz | awk '{print $1}')
+          set -l current_dir (pwd)
           if test -n (mkdir -p "$NVM_DIR/bin/node-$t"
               and cd "$NVM_DIR/bin"
               and curl -C - --progress-bar $url -o "node-$t.tar.gz"
@@ -226,11 +230,12 @@ function nvm
               and tar -xzf "node-$t.tar.gz" -C "node-$t" --strip-components 1
               and mv "node-$t" "../$VERSION"; and rm -f "node-$t.tar.gz")
             nvm use $VERSION
-            return
           else
             echo "Binary download failed, trying source." >&2
             cd "$NVM_DIR/bin"; and rm -rf "node-$t.tar.gz" "node-$t"
           end
+          cd $current_dir
+          return
         end
       end
 
@@ -381,7 +386,7 @@ function nvm
     case "alias"
       mkdir -p $NVM_DIR/alias
       if [ (count $argv) -le 2 ]
-        set current_dir (pwd)
+        set -l current_dir (pwd)
         cd $NVM_DIR/alias
         and if [ (count $argv) -ne 2 ]
           set argv[2] ""
