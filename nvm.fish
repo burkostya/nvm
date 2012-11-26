@@ -207,15 +207,11 @@ function nvm
 
       # shortcut - try the binary if possible.
       if test -n "$os"
-        set binavail 0
         # binaries started with node 0.8.6
-        switch $VERSION
-          case 'v0.8.[012345]'
-            set binavail 0
-          case 'v0.[1234567]'
-            set binavail 0
-          case '*' 
-            set binavail 1
+        if test -z (echo "$VERSION" | sed -r 's/v0\.(8\.[012345]|[1234567]\.[0-9]+)//g')
+          set binavail 0
+        else            
+          set binavail 1
         end
         if [ $binavail -eq 1 ]
           set t "$VERSION-$os-$arch"
