@@ -187,7 +187,7 @@ function nvm
       set -l sum ''
       set -l tarball ''
 
-      if test -z (which curl)
+      if not command_exists curl
         echo 'NVM Needs curl to proceed.' >&2
       end
 
