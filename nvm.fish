@@ -245,37 +245,42 @@ function nvm
       else if test -n (curl -Is "http://nodejs.org/dist/node-$VERSION.tar.gz" | grep '200 OK')
         set tarball "http://nodejs.org/dist/node-$VERSION.tar.gz"
       end
-      if test -z (test -n "$tarball"
-                  and mkdir -p "$NVM_DIR/src"
-                  and cd "$NVM_DIR/src"
-                  and curl --progress-bar $tarball -o "node-$VERSION.tar.gz"
-                  and if [ "$sum" = "" ]
-                  else 
-                    nvm_checksum (shasum node-$VERSION.tar.gz | awk '{print $1}') $sum
-                  end
-                  and tar -xzf "node-$VERSION.tar.gz"
-                  and cd "node-$VERSION"
-                  and ./configure --prefix="$NVM_DIR/$VERSION" $ADDITIONAL_PARAMETERS
-                  and make
-                  and rm -f "$NVM_DIR/$VERSION" 2>/dev/null
-                  and make install)
-        nvm use $VERSION
-        if test -n (which npm)
-          echo "Installing npm..."
-          if [ (expr match $VERSION '\(^v0\.1\.\)') -ne '' ]
-            echo "npm requires node v0.2.3 or higher"
-          else if [ (expr match $VERSION '\(^v0\.2\.\)')-ne '' ]
-            if [ (expr match $VERSION '\(^v0\.2\.[0-2]$\)') -ne '' ]
+      # use python2 for Archlinux
+      if test -n (expr match (uname -a) '\(.*ARCH.*\)')
+        not test -d $NVM_DIR/bin; and mkdir $NVM_DIR/bin
+        ln -s /usr/bin/python2 $NVM_DIR/bin/python 2>/dev/null
+        set -x PATH $NVM_DIR/bin $PATH
+      end
+      if test -n "$tarball"
+        mkdir -p "$NVM_DIR/src"
+        and cd "$NVM_DIR/src"
+        and curl --progress-bar $tarball -o "node-$VERSION.tar.gz"
+        and nvm_checksum (shasum node-$VERSION.tar.gz | awk '{print $1}') $sum
+        and tar -xzf "node-$VERSION.tar.gz"
+        and cd "node-$VERSION"
+        and ./configure --prefix="$NVM_DIR/$VERSION" $ADDITIONAL_PARAMETERS
+        and make
+        and rm -f "$NVM_DIR/$VERSION" 2>/dev/null
+        and make install
+        if [ $status = 0 ]
+          nvm use $VERSION
+          if not command_exists npm
+            echo "Installing npm..."
+            if test -n (expr match $VERSION '\(^v0\.\(1\.[0-9]\{1,2\}\|2\.[012]\)\)')
               echo "npm requires node v0.2.3 or higher"
             else
-              curl https://npmjs.org/install.sh | clean=yes npm_install=0.2.19 sh
+              set clean yes
+              set npm_install 0.2.19
+              curl https://npmjs.org/install.sh | sh
             end
-          else
-            curl https://npmjs.org/install.sh | clean=yes sh
           end
+        else
+          echo "nvm: install $VERSION failed!"
         end
-      else
-        echo "nvm: install $VERSION failed!"
+      end
+      if test -n (expr match (uname -a) '\(.*ARCH.*\)')
+        test -n $NVM_DIR; and rm -r $NVM_DIR/bin
+        set -x PATH (echo $PATH | sed -r "s/[^ ]$NVM_DIR\/bin //g")
       end
     case "uninstall"
       [ (count $argv) -ne 2 ]; and nvm help; and return
