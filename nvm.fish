@@ -181,7 +181,7 @@ function nvm
       echo
     case "install"
       # initialize local variables
-      set -l binavail ''
+      set -l binavail 0
       set -l t ''
       set -l url ''
       set -l sum ''
