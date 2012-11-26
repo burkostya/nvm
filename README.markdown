@@ -29,7 +29,7 @@ To download, compile, and install the v0.6.14 release of node, do this:
 
     nvm install 0.6.14
     
-Fish: **partially broken**. Binary installations works only ( node versions > v0.8.5).
+Fish: *seems to work*
 
 And then in any new shell just use the installed version:
 
