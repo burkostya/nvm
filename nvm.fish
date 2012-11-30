@@ -434,6 +434,9 @@ function nvm
       end
       return 0
     case "ls-remote"
+      if [ (count $argv) -lt 2 ]
+        set argv[2] ''
+      end
       print_versions (nvm_ls_remote $argv[2])
       return
     case "alias"
