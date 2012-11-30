@@ -388,19 +388,18 @@ function nvm
       mkdir -p $NVM_DIR/alias
       if [ (count $argv) -le 2 ]
         set -l current_dir (pwd)
+        if [ (count $argv) -lt 2 ]
+          set argv[2] ''
+        end
         cd $NVM_DIR/alias
-        and if [ (count $argv) -ne 2 ]
-          set argv[2] ""
-          for ALIAS in (\ls $argv[2]* 2>/dev/null)
-            set DEST (cat $ALIAS)
-            set VERSION (nvm_version $DEST)
-            if [ "$DEST" = "$VERSION" ]
-              echo "$ALIAS -> $DEST"
-            else
-              echo "$ALIAS -> $DEST \(-> $VERSION\)"
-            end
+        and for ALIAS in (\ls "$argv[2]"* 2>/dev/null)
+          set DEST (cat $ALIAS)
+          set VERSION (nvm_version $DEST)
+          if [ "$DEST" = "$VERSION" ]
+            echo "$ALIAS -> $DEST"
+          else
+            echo "$ALIAS -> $DEST (-> $VERSION)"
           end
-          set -e argv[2]
         end
         cd $current_dir
         return
@@ -410,14 +409,13 @@ function nvm
         echo "$argv[2] -> *poof*"
         return
       end
-      mkdir -p $NVM_DIR/alias
       set VERSION (nvm_version $argv[3])
-      if [ status -ne 0 ]
+      if [ "$VERSION" = 'N/A' ]
         echo "! WARNING: Version '$argv[3]' does not exist." >&2
       end
-      echo $argv[3] > "$NVM_DIR/alias/$2"
-      if [ "$argv[3]" -ne "$VERSION" ]
-        echo "$argv[2] -> $argv[3] \(-> $VERSION\)"
+      echo "$argv[3]" > "$NVM_DIR/alias/$argv[2]"
+      if [ "$argv[3]" != "$VERSION" ]
+        echo "$argv[2] -> $argv[3] (-> $VERSION)"
       else
         echo "$argv[2] -> $argv[3]"
       end

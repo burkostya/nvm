@@ -59,7 +59,7 @@ To set a default Node version to be used in any new shell, use the alias 'defaul
 
     nvm alias default 0.6
     
-Fish: **broken**
+Fish: *seems to work*
 
 ## License
 
