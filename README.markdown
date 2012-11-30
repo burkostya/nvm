@@ -2,7 +2,10 @@
 
 ## Installation
 
-**Fish version is broken for now**
+**Fish version is broken for now. NOT works:**
+
+    - nvm deactivate
+    - nvm copy-packages <version>
 
 First you'll need to make sure your system has a c++ compiler.  For OSX, XCode will work, for Ubuntu, the build-essential and libssl-dev packages work.
 
@@ -29,26 +32,18 @@ To download, compile, and install the v0.6.14 release of node, do this:
 
     nvm install 0.6.14
     
-Fish: *seems to work*
-
 And then in any new shell just use the installed version:
 
     nvm use 0.6.14
     
-Fish: *seems to work*
-
 Or you can just run it:
 
     nvm run 0.6.14
     
-Fish: *seems to work*
-
 If you want to see what versions are available:
 
     nvm ls
     
-Fish: *seems to work*
-
 To restore your PATH, you can deactivate it.
 
     nvm deactivate
@@ -59,8 +54,6 @@ To set a default Node version to be used in any new shell, use the alias 'defaul
 
     nvm alias default 0.6
     
-Fish: *seems to work*
-
 ## License
 
 Nvm is released under the MIT license.
