@@ -41,7 +41,7 @@ Or you can just run it:
 
     nvm run 0.6.14
     
-Fish: **broken**
+Fish: *seems to work*
 
 If you want to see what versions are available:
 
