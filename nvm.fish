@@ -380,7 +380,7 @@ function nvm
         echo -n "current: "\t; and nvm_version current
         nvm alias
       end
-      return
+      return 0
     case "ls-remote"
       print_versions (nvm_ls_remote $argv[2])
       return
