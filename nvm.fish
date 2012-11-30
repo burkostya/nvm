@@ -413,7 +413,13 @@ function nvm
         return
       end
       echo "Running node $VERSION"
-      $NVM_DIR/$VERSION/bin/node "$argv[1 2 3]"
+      if [ (count $argv) -eq 3 ]
+        set node_argv $argv[3]
+      else
+        set node_argv ''
+      end
+      set node_exec "$NVM_DIR/$VERSION/bin/node $node_argv"
+      call $node_exec
     case "ls"
       if [ (count $argv) -eq 1 ]
         set argv[2] ""
