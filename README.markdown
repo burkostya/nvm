@@ -4,8 +4,8 @@
 
 **Fish version is broken for now. NOT works:**
 
-    - nvm deactivate
-    - nvm copy-packages <version>
+* nvm deactivate
+* nvm copy-packages <version>
 
 First you'll need to make sure your system has a c++ compiler.  For OSX, XCode will work, for Ubuntu, the build-essential and libssl-dev packages work.
 
