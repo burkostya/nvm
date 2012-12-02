@@ -493,6 +493,9 @@ function nvm
       rm -f $NVM_DIR/v* 2>/dev/null
       echo "Cache cleared."
     case "version"
+      if [ (count $argv) -ne 2 ]
+        set argv[2] ''
+      end 
       print_versions (nvm_version $argv[2])
     case '*'
       nvm help
