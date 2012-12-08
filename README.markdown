@@ -9,7 +9,30 @@
 
 First you'll need to make sure your system has a c++ compiler.  For OSX, XCode will work, for Ubuntu, the build-essential and libssl-dev packages work.
 
-To install create a folder somewhere in your filesystem with the "`nvm.sh`"("`nvm.fish`") file inside it.  I put mine in a folder called "`nvm`".
+### Install script
+
+To install you could use the [install script](https://github.com/creationix/nvm/blob/master/install.sh)([fish version](https://github.com/burkostya/nvm/blob/master/install.fish)) (requires Git) using cURL:
+
+    curl https://raw.github.com/creationix/nvm/master/install.sh | sh
+
+or for fish:
+
+    curl https://raw.github.com/burkostya/nvm/master/install.fish | fish
+
+or Wget:
+
+    wget -qO- https://raw.github.com/creationix/nvm/master/install.sh | sh
+    
+or for fish
+
+    wget -qO- https://raw.github.com/burkostya/nvm/master/install.fish | fish
+
+<sub>The script clones the Nvm repository to `~/.nvm` and adds the source line to your profile (`~/.bash_profile` or `~/.profile` or ~/.config/fish/config.fish).</sub>
+
+
+### Manual install
+
+For manual install create a folder somewhere in your filesystem with the "`nvm.sh`"("`nvm.fish`") file inside it.  I put mine in a folder called "`nvm`".
 
 Or if you have `git` installed, then just clone it:
 
@@ -23,7 +46,7 @@ Or for fish shell
     
     test -s ~/.nvm/nvm.fish; and . ~/.nvm/nvm.fish
 
-I always add this line to my ~/.bashrc or ~/.profile (~/.config/fish/config.fish for fish) file to have it automatically sources upon login.   
+I always add this line to my `~/.bashrc` or `~/.profile` (~/.config/fish/config.fish for fish) file to have it automatically sources upon login.   
 Often I also put in a line to use a specific version of node.
     
 ## Usage
@@ -31,7 +54,7 @@ Often I also put in a line to use a specific version of node.
 To download, compile, and install the v0.6.14 release of node, do this:
 
     nvm install 0.6.14
-    
+
 And then in any new shell just use the installed version:
 
     nvm use 0.6.14
