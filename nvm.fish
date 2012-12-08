@@ -360,22 +360,33 @@ function nvm
         nvm unalias (basename $A)
       end
     case "deactivate"
-      switch $PATH
-        case "*$NVM_DIR/*/bin*"
-          set -x PATH (echo $PATH | sed -r "s/[^ ]$NVM_DIR\/*\/bin //g")
-          functions -e nvm_version nvm_remote_version nvm_ls \
-                       nvm_ls_remote nvm_checksum print_versions nvm
-          echo "$NVM_DIR/*/bin removed from \$PATH"
-        case '*'
-          echo "Could not find $NVM_DIR/*/bin in \$PATH"
+      set -l path_index 0
+      for path in $PATH
+        set path_index (math $path_index + 1)
+        if test -n (expr match (echo $path) "\($NVM_DIR/.*/bin\)")
+          set -e PATH[$path_index]
+          functions -e nvm_version nvm_remote_version nvm_ls nvm_ls_remote nvm_checksum print_versions nvm
+          echo "$NVM_DIR/*/bin removed from "\$"PATH"
+          set path_clean true
+        end
       end
-      switch $MANPATH
-        case "*$NVM_DIR/*/share/man*"
-          set -x MANPATH (echo $MANPATH | sed -r "s/[^ ]$NVM_DIR\/*\/share\/man //g")
+      if test -z "$path_clean"
+        echo "Could not find $NVM_DIR/*/bin in \$PATH"
+      end
+
+      set -l manpath_index 0
+      for manpath in $MANPATH
+        set manpath_index (math $manpath_index + 1)
+        if test -n (expr match (echo $manpath) "\($NVM_DIR/.*/share/man\)")
+          set -e MANPATH[$manpath_index]
           echo "$NVM_DIR/*/share/man removed from \$MANPATH"
-        case '*'
-          echo "Could not find $NVM_DIR/*/share/man in \$MANPATH"
+          set manpath_clean true
+        end
       end
+      if test -z "$manpath_clean"
+        echo "Could not find $NVM_DIR/*/share/man in \$MANPATH"
+      end
+
     case "use"
       if [ (count $argv) -ne 2 ]
         nvm help
