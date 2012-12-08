@@ -4,8 +4,8 @@
 
 **Fish version is broken for now. NOT works:**
 
-* nvm deactivate
 * nvm copy-packages <version>
+* nvm clear-cache
 
 First you'll need to make sure your system has a c++ compiler.  For OSX, XCode will work, for Ubuntu, the build-essential and libssl-dev packages work.
 
@@ -48,8 +48,6 @@ To restore your PATH, you can deactivate it.
 
     nvm deactivate
     
-Fish: **broken**
-
 To set a default Node version to be used in any new shell, use the alias 'default':
 
     nvm alias default 0.6
