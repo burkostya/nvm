@@ -24,7 +24,7 @@ else
   end
 end
 
-set SOURCE_STR 'test -s "$HOME/.nvm/nvm.fish"; and . "$HOME/.nvm/nvm.fish"  # This loads NVM'
+set SOURCE_STR "test -s "$NVM_TARGET"/nvm.fish; and . "$NVM_TARGET"/nvm.fish  # This loads NVM"
 
 if test -z $PROFILE 
   echo "=> Profile $PROFILE not found"
