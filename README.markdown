@@ -15,7 +15,7 @@ To install you could use the [install script](https://github.com/creationix/nvm/
 
     curl https://raw.github.com/creationix/nvm/master/install.sh | sh
 
-or for fish:
+for fish:
 
     curl https://raw.github.com/burkostya/nvm/master/install.fish | fish
 
@@ -23,11 +23,11 @@ or Wget:
 
     wget -qO- https://raw.github.com/creationix/nvm/master/install.sh | sh
     
-or for fish
+for fish
 
     wget -qO- https://raw.github.com/burkostya/nvm/master/install.fish | fish
 
-<sub>The script clones the Nvm repository to `~/.nvm` and adds the source line to your profile (`~/.bash_profile` or `~/.profile` or ~/.config/fish/config.fish).</sub>
+<sub>The script clones the Nvm repository to `~/.nvm` and adds the source line to your profile (`~/.bash_profile` or `~/.profile` or `~/.config/fish/config.fish`).</sub>
 
 
 ### Manual install
@@ -46,7 +46,7 @@ Or for fish shell
     
     test -s ~/.nvm/nvm.fish; and . ~/.nvm/nvm.fish
 
-I always add this line to my `~/.bashrc` or `~/.profile` (~/.config/fish/config.fish for fish) file to have it automatically sources upon login.   
+I always add this line to my `~/.bashrc` or `~/.profile` (`~/.config/fish/config.fish` for fish) file to have it automatically sources upon login.   
 Often I also put in a line to use a specific version of node.
     
 ## Usage
