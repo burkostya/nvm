@@ -397,18 +397,25 @@ function nvm
         echo "$VERSION version is not installed yet"
         return
       end
-      switch "$PATH"
-        case '*$NVM_DIR/*/bin*'
-          set -x PATH (echo $PATH | sed -r "s/[^ ]$NVM_DIR\/*\/bin / $NVM_DIR\/$VERSION\/bin /g")
-        case '*'
-          set -x PATH $NVM_DIR/$VERSION/bin $PATH
+
+      set -l path_index 0
+      for path in $PATH
+        set path_index (math $path_index + 1)
+        if test -n (expr match (echo $path) "\($NVM_DIR/.*/bin\)")
+          set -e PATH[$path_index]
+        end
       end
-      switch "$MANPATH"
-        case '*$NVM_DIR/*/share/man*'
-          set -x MANPATH (echo $MANPATH | sed -r "s/[^ ]$NVM_DIR\/*\/share\/man / $NVM_DIR\/$VERSION\/share\/man /g")
-        case '*'
-          set -x MANPATH $NVM_DIR/$VERSION/share/man $MANPATH
+      set -x PATH $NVM_DIR/$VERSION/bin $PATH
+
+      set -l manpath_index 0
+      for manpath in $MANPATH
+        set manpath_index (math $manpath_index + 1)
+        if test -n (expr match (echo $manpath) "\($NVM_DIR/.*/share/man\)")
+          set -e MANPATH[$manpath_index]
+        end
       end
+      set -x MANPATH $NVM_DIR/$VERSION/share/man $MANPATH
+
       set -x NVM_PATH "$NVM_DIR/$VERSION/lib/node"
       set -x NVM_BIN "$NVM_DIR/$VERSION/bin"
       echo "Now using node $VERSION"
